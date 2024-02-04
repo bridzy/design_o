@@ -35,20 +35,20 @@ class CommandLineHandler {
         Options options = new Options();
         options.addRequiredOption("s", "source", true, "File containing the todos");
         options.addOption("d", "done", false, "Mark todo as done");
-        
+
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
             String fileName = cmd.getOptionValue("s");
             boolean isDone = cmd.hasOption("d");
             List<String> positionalArgs = cmd.getArgList();
-            
+
             if (positionalArgs.isEmpty()) {
                 System.err.println("Missing Command");
                 return null;
             }
             String commandType = positionalArgs.get(0);
-            
+
             return new Command(fileName, commandType, positionalArgs, isDone);
         } catch (ParseException ex) {
             System.err.println("Fail to parse arguments: " + ex.getMessage());
@@ -102,12 +102,12 @@ class JsonFormatHandler implements FileFormatHandler {
             String content = Files.readString(path);
             todos = mapper.readValue(content, new TypeReference<List<ObjectNode>>(){});
         }
-        
+
         ObjectNode newTodo = mapper.createObjectNode();
         newTodo.put("task", todo);
         newTodo.put("done", isDone);
         todos.add(newTodo);
-        
+
         Files.writeString(path, mapper.writeValueAsString(todos));
     }
 
@@ -117,39 +117,48 @@ class JsonFormatHandler implements FileFormatHandler {
             String content = Files.readString(path);
             List<ObjectNode> todos = mapper.readValue(content, new TypeReference<List<ObjectNode>>(){});
             todos.stream()
-                .filter(todo -> !onlyDone || todo.get("done").asBoolean())
-                .forEach(todo -> System.out.println((todo.get("done").asBoolean() ? "Done: " : "") + todo.get("task").asText()));
+                    .filter(todo -> !onlyDone || todo.get("done").asBoolean())
+                    .forEach(todo -> System.out.println((todo.get("done").asBoolean() ? "Done: " : "") + todo.get("task").asText()));
         }
     }
 }
-class CsvFormatHandler implements FileFormatHandler {
-    private String content;
 
-    public String readContent(String fileName) throws IOException {
+class CsvFormatHandler implements FileFormatHandler {
+    @Override
+    public void processInsertCommand(String fileName, String todo, boolean isDone) throws IOException {
+        Path path = Paths.get(fileName);
+        String newTodoLine = todo + "," + isDone;
+
+        List<String> existingTodos;
+        if (Files.exists(path)) {
+            existingTodos = Files.readAllLines(path);
+        } else {
+            existingTodos = List.of();
+        }
+
+        existingTodos.add(newTodoLine);
+        Files.write(path, existingTodos);
+    }
+
+    @Override
+    public void processListCommand(String fileName, boolean onlyDone) throws IOException {
         Path path = Paths.get(fileName);
         if (Files.exists(path)) {
-            content = Files.readString(path);
-        } else {
-            content = "";
+            List<String> lines = Files.readAllLines(path);
+            lines.stream()
+                    .filter(line -> !onlyDone || line.endsWith(",true"))
+                    .forEach(line -> {
+                        String[] parts = line.split(",");
+                        if (parts.length > 1 && Boolean.parseBoolean(parts[1])) {
+                            System.out.println("Done: " + parts[0]);
+                        } else {
+                            System.out.println(parts[0]);
+                        }
+                    });
         }
-        return content;
-    }
-
-    public void writeContent(String fileName, String content) throws IOException {
-        Files.writeString(Paths.get(fileName), content);
-    }
-
-    public void processInsertCommand(String todo) {
-        if (!content.endsWith("\\n") && !content.isEmpty()) {
-            content += "\\n";
-        }
-        content += todo;
-    }
-
-    public void processListCommand() {
-        Arrays.stream(content.split("\\n")).forEach(todo -> System.out.println("- " + todo));
     }
 }
+
 
 class TodoProcessor {
     private FileFormatHandler formatHandler;
