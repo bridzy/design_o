@@ -6,8 +6,6 @@
 
 ## Refactorisation du Code Java avec les Principes SOLID
 
-Nous avons entrepris de refactoriser une application Java de gestion de tâches pour adhérer aux principes SOLID, en se concentrant sur la modularisation du code et l'amélioration de l'extensibilité et de la maintenabilité.
-
 ### Application des Principes SOLID
 
 #### Single Responsibility Principle (SRP)
