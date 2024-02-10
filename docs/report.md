@@ -55,28 +55,39 @@ Cette refactorisation a pour but de rendre l'application plus facile à mainteni
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 TP02 : 
-# Modifications du Code pour Gérer les Todos Accomplis
-
-## Introduction
-Les modifications suivantes ont été apportées au code initial pour introduire la gestion des tâches (todos) marquées comme accomplies. Cela inclut l'ajout d'un paramètre `--done` lors de l'ajout d'une tâche et la possibilité de lister uniquement les tâches accomplies.
-
 ## Modifications Apportées
 
-### Ajout du Paramètre `--done`
-- Le parseur de ligne de commande `CommandLineHandler` a été mis à jour pour reconnaître le paramètre `--done`.
-- Une nouvelle propriété `isDone` a été ajoutée à la classe `Command` pour stocker l'état de la tâche.
+### Interface `TodoFileManager`
 
-### Gestion des Todos Accomplis
-- L'interface `FileFormatHandler` a été mise à jour pour inclure deux nouvelles méthodes : `processInsertCommand` et `processListCommand`, qui prennent en compte l'état accompli des tâches.
-- La classe `JsonFormatHandler` a été implémentée pour gérer correctement l'ajout et le listage des tâches, en prenant en compte leur état (accompli ou non).
+- **Ajout de Paramètres** : Modification de la signature des méthodes pour inclure la gestion de l'état des tâches (faites ou non) et pour permettre de filtrer les tâches lors de l'affichage.
 
-### Implémentation pour le Format JSON
-- Les tâches sont maintenant stockées dans un format JSON qui inclut l'état de la tâche (`done` : true ou false).
-- La méthode `processInsertCommand` ajoute une nouvelle tâche avec l'indicateur `done` approprié.
-- La méthode `processListCommand` a été mise à jour pour filtrer et afficher les tâches en fonction de leur état accompli, avec un préfixe "Done: " pour les tâches accomplies.
+  ```java
+  void insert(String todo, boolean isDone, Path filePath) throws IOException;
+  void list(Path filePath, boolean onlyDone) throws IOException;
+  ```
 
-### Classe `TodoProcessor`
-- La logique de traitement des commandes a été adaptée pour utiliser le gestionnaire de format approprié (`JsonFormatHandler`) et pour traiter correctement les nouvelles fonctionnalités.
+### Classe `JsonFileManager`
 
-## Conclusion
-Ces modifications permettent à l'application de gérer de manière flexible les tâches en marquant certaines d'entre elles comme accomplies et en offrant la possibilité de filtrer les tâches basées sur leur état lors du listage.
+- **Gestion de l'État des Tâches** : Adaptation pour créer et traiter des objets JSON incluant un champ `"done"` indiquant si une tâche est faite.
+
+- **Vérification des Nullités** : Ajout de vérifications pour éviter les `NullPointerException` lors de la lecture des champs `"task"` et `"done"` des objets JSON.
+
+### Classe `CsvFileManager`
+
+- **Adaptation pour l'État des Tâches** : Modification pour inclure l'état des tâches (faites ou non) dans le fichier CSV et pour filtrer lors de l'affichage.
+
+### Classe `App`
+
+- **Gestion des Arguments CLI** : Ajout de l'option `--done` pour marquer les tâches comme faites lors de l'ajout et pour filtrer les tâches faites lors de l'affichage.
+
+## Correction des Erreurs
+
+- **NullPointerException** : Correction des erreurs causées par des tentatives d'accès à des champs non existants dans les objets JSON, en ajoutant des vérifications de nullité avant d'accéder aux champs `"task"` et `"done"`.
+
+## Code Final Adapté
+
+Les modifications ont été intégrées à travers les différentes classes pour prendre en charge les nouvelles fonctionnalités demandées et pour corriger les erreurs identifiées. Voici les points clés de l'implémentation :
+
+- **Insertion et Liste des Tâches** : Les tâches peuvent désormais être ajoutées avec un état (fait ou non fait), et l'affichage des tâches peut être filtré pour montrer uniquement celles qui sont marquées comme faites.
+
+- **Robustesse** : Le code a été rendu plus robuste par la gestion appropriée des cas où les données attendues pourraient être manquantes ou mal formées.
