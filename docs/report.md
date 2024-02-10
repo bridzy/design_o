@@ -52,9 +52,6 @@ La classe principale `App` utilise `TodoFileManager` pour déléguer les opérat
 
 Cette refactorisation a pour but de rendre l'application plus facile à maintenir et à étendre, notamment en facilitant l'ajout de nouveaux formats de fichiers ou de nouvelles commandes sans impacter le code existant. L'application est désormais mieux structurée, avec des composants clairement définis suivant les principes SOLID.
 
----
-
-Ce résumé met en lumière la méthodologie suivie pour refactoriser le code Java initial, en se concentrant sur l'amélioration de la structure et la conformité aux principes SOLID, et illustre l'impact positif de ces principes sur la conception logicielle.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 TP02 : 
