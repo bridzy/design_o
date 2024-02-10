@@ -4,27 +4,63 @@
 - **Lastname**: LEKHCHINE
 
 
-## Modifications Appliquées
+Voici un résumé en Markdown de la refactorisation principale du code Java pour appliquer les principes SOLID, incluant la mise en place de l'architecture et la logique derrière la séparation des responsabilités et l'introduction d'abstractions.
 
-### Single Responsibility Principle (SRP)
-- **`CommandLineHandler`** pour analyser les arguments CLI.
-- **`TodoProcessor`** pour gérer la logique de traitement des tâches.
+---
 
-### Open-Closed Principle (OCP)
-- **`FileFormatHandler`** comme interface pour les opérations de formatage de fichiers.
-- **`JsonFormatHandler`** et **`CsvFormatHandler`** implémentent `FileFormatHandler`.
+## Refactorisation du Code Java avec les Principes SOLID
 
-### Liskov Substitution Principle (LSP)
-- **`JsonFormatHandler`** et **`CsvFormatHandler`** sont utilisables de manière interchangeable là où `FileFormatHandler` est requis.
+Nous avons entrepris de refactoriser une application Java de gestion de tâches pour adhérer aux principes SOLID, en se concentrant sur la modularisation du code et l'amélioration de l'extensibilité et de la maintenabilité.
 
-### Interface Segregation Principle (ISP)
-- **`FileFormatHandler`** fournit une interface ciblée pour la gestion des formats de fichiers.
+### Application des Principes SOLID
 
-### Dependency Inversion Principle (DIP)
-- **`TodoProcessor`** dépend des abstractions (`FileFormatHandler`), et non des détails de mise en œuvre (`JsonFormatHandler`, `CsvFormatHandler`).
+#### Single Responsibility Principle (SRP)
 
-## Conclusion
-Les modifications apportées au code alignent l'application avec les principes SOLID, favorisant une meilleure extensibilité, maintenabilité et flexibilité.
+- **Séparation des Responsabilités** : Le code a été divisé en classes distinctes avec des responsabilités uniques, telles que la manipulation des fichiers (`CsvFileManager` et `JsonFileManager`) et le traitement des commandes d'insertion et de listage.
+
+#### Open/Closed Principle (OCP)
+
+- **Extensibilité** : Une interface `TodoFileManager` a été créée pour permettre l'extension à d'autres formats de fichiers sans modifier le code existant.
+
+#### Liskov Substitution Principle (LSP)
+
+- Les classes implémentant `TodoFileManager` peuvent être substituées sans affecter le comportement attendu, permettant une flexibilité dans le choix du format de fichier.
+
+#### Interface Segregation Principle (ISP)
+
+- Les interfaces ont été conçues pour être spécifiques aux besoins des clients qui les utilisent, évitant ainsi les dépendances inutiles.
+
+#### Dependency Inversion Principle (DIP)
+
+- Le code de haut niveau ne dépend pas des détails de mise en œuvre des classes de bas niveau mais des abstractions, facilitant ainsi la gestion des dépendances.
+
+### Architecture du Code
+
+L'architecture refactorisée implémente `TodoFileManager` pour gérer les opérations de fichier, avec deux implémentations concrètes pour les formats CSV et JSON. Cela démontre l'application des principes SOLID pour améliorer la structure du code.
+
+```java
+interface TodoFileManager {
+    void insert(String todo, Path filePath) throws IOException;
+    void list(Path filePath) throws IOException;
+}
+```
+
+#### Implémentations Spécifiques
+
+- **CsvFileManager** : Gère les fichiers CSV.
+- **JsonFileManager** : Gère les fichiers JSON.
+
+### Main Application (`App.java`)
+
+La classe principale `App` utilise `TodoFileManager` pour déléguer les opérations d'insertion et de listage à l'implémentation appropriée en fonction du type de fichier spécifié.
+
+### Conclusion
+
+Cette refactorisation a pour but de rendre l'application plus facile à maintenir et à étendre, notamment en facilitant l'ajout de nouveaux formats de fichiers ou de nouvelles commandes sans impacter le code existant. L'application est désormais mieux structurée, avec des composants clairement définis suivant les principes SOLID.
+
+---
+
+Ce résumé met en lumière la méthodologie suivie pour refactoriser le code Java initial, en se concentrant sur l'amélioration de la structure et la conformité aux principes SOLID, et illustre l'impact positif de ces principes sur la conception logicielle.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 TP02 : 
