@@ -4,10 +4,6 @@
 - **Lastname**: LEKHCHINE
 
 
-Voici un résumé en Markdown de la refactorisation principale du code Java pour appliquer les principes SOLID, incluant la mise en place de l'architecture et la logique derrière la séparation des responsabilités et l'introduction d'abstractions.
-
----
-
 ## Refactorisation du Code Java avec les Principes SOLID
 
 Nous avons entrepris de refactoriser une application Java de gestion de tâches pour adhérer aux principes SOLID, en se concentrant sur la modularisation du code et l'amélioration de l'extensibilité et de la maintenabilité.
