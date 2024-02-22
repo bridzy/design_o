@@ -91,3 +91,27 @@ Les modifications ont été intégrées à travers les différentes classes pour
 - **Insertion et Liste des Tâches** : Les tâches peuvent désormais être ajoutées avec un état (fait ou non fait), et l'affichage des tâches peut être filtré pour montrer uniquement celles qui sont marquées comme faites.
 
 - **Robustesse** : Le code a été rendu plus robuste par la gestion appropriée des cas où les données attendues pourraient être manquantes ou mal formées.
+---------------------------------------------------------------------
+TP 03 : 
+
+# Gestion des Tâches TODO
+
+## Introduction
+Ce document présente un résumé des choix de conception et des motifs de conception utilisés dans le cadre du TP sur la gestion des tâches TODO.
+
+## Choix de Design Pattern
+Les principaux motifs de conception utilisés dans cette application sont **le pattern Strategy** et **le pattern Command** pour structurer le code de manière flexible et maintenable.
+
+### Pattern Strategy
+Le pattern Strategy est utilisé pour définir une famille d'algorithmes, encapsuler chacun d'eux et les rendre interchangeables. Dans notre cas, `TodoFileManager` agit comme la stratégie de base pour les opérations sur les fichiers TODO, avec deux stratégies concrètes : `JsonFileManager` et `CsvFileManager`. Cela permet d'ajouter facilement de nouveaux formats de fichier sans modifier le code client.
+
+### Pattern Command
+Le pattern Command est employé pour encapsuler une demande en tant qu'objet, permettant ainsi de paramétrer les clients avec des requêtes, des files d'attente ou des opérations. Bien que non explicitement défini dans le code, ce motif est impliqué par la structure des opérations `insert`, `list`, et `migrate` qui peuvent être considérées comme des commandes.
+
+## Impact sur la Base de Code
+L'utilisation de ces motifs de conception rend le code plus modulaire, facile à étendre et à maintenir. Par exemple, l'ajout d'un nouveau format de fichier ne nécessite que la création d'une nouvelle classe implémentant `TodoFileManager`. De même, la modification ou l'ajout de nouvelles commandes (opérations) est simplifiée grâce à cette structure flexible.
+
+## Diagramme de Classe
+Ci-dessous, le diagramme de classe UML illustre la structure du code :
+
+![Diagramme de Classe](diagramme_classe.png)
