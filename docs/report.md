@@ -113,5 +113,37 @@ L'utilisation de ces motifs de conception rend le code plus modulaire, facile à
 
 ## Diagramme de Classe
 Ci-dessous, le diagramme de classe UML illustre la structure du code :
+```mermaid
+classDiagram
+    class TodoFileManager {
+      <<interface>>
+      +insert(String todo, boolean isDone, Path filePath) void
+      +list(Path filePath, boolean onlyDone) void
+      +readAll(Path filePath) List~String[]~
+    }
+
+    class JsonFileManager {
+      -mapper ObjectMapper
+      +insert(String todo, boolean isDone, Path filePath) void
+      +list(Path filePath, boolean onlyDone) void
+      +readAll(Path filePath) List~String[]~
+    }
+
+    class CsvFileManager {
+      +insert(String todo, boolean isDone, Path filePath) void
+      +list(Path filePath, boolean onlyDone) void
+      +readAll(Path filePath) List~String[]~
+    }
+
+    class App {
+      +main(String[] args) void
+      +exec(String[] args) int
+      -migrate(Path sourcePath, Path outputPath) void
+      -getFileManager(Path filePath) TodoFileManager
+    }
+
+    TodoFileManager <|.. JsonFileManager : implements
+    TodoFileManager <|.. CsvFileManager : implements
+    App --> TodoFileManager : uses
 
 ![Diagramme de Classe](diagramme_classe.png)
