@@ -113,6 +113,9 @@ L'utilisation de ces motifs de conception rend le code plus modulaire, facile à
 
 ## Diagramme de Classe
 Ci-dessous, le diagramme de classe UML illustre la structure du code :
+
+![Diagramme de Classe](diagramme_classe.png)
+
 ```mermaid
 classDiagram
     class TodoFileManager {
@@ -146,4 +149,3 @@ classDiagram
     TodoFileManager <|.. CsvFileManager : implements
     App --> TodoFileManager : uses
 
-![Diagramme de Classe](diagramme_classe.png)
