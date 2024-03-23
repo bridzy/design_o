@@ -111,6 +111,57 @@ Le pattern Command est employé pour encapsuler une demande en tant qu'objet, pe
 ## Impact sur la Base de Code
 L'utilisation de ces motifs de conception rend le code plus modulaire, facile à étendre et à maintenir. Par exemple, l'ajout d'un nouveau format de fichier ne nécessite que la création d'une nouvelle classe implémentant `TodoFileManager`. De même, la modification ou l'ajout de nouvelles commandes (opérations) est simplifiée grâce à cette structure flexible.
 
+
+
+##Final
+
+
+# Newcomer Guide
+
+## Adding a New Command
+
+To add a new command, a newcomer can follow these steps:
+
+1. **Create a New Command Class**: Implement the new command as a new class extending the `Command` interface.
+2. **Define Command Logic**: Implement the logic for the new command within the class.
+3. **Register Command**: Register the new command in the application's command registry.
+
+## Adding a New File-Based Datasource
+
+To add a new file-based datasource, a newcomer can do the following:
+
+1. **Create Datasource Class**: Implement the new datasource as a class, handling file I/O operations for the specific format.
+2. **Implement Interface**: Implement the `FileDatasource` interface to ensure consistency with other file-based datasources.
+3. **Register Datasource**: Register the new datasource in the application's datasource registry.
+
+## Adding a Non-File-Based Datasource
+
+To add a non-file-based datasource, the process involves:
+
+1. **Create Datasource Class**: Implement the new datasource as a class, providing methods to interact with the non-file-based storage.
+2. **Implement Interface**: Implement the `Datasource` interface to ensure consistency with other datasources.
+3. **Register Datasource**: Register the new datasource in the application's datasource registry.
+
+## Adding a New Attribute to a Todo
+
+To add a new attribute to a Todo, newcomers should:
+
+1. **Modify Todo Class**: Add a new field to the `Todo` class to represent the new attribute.
+2. **Update Methods**: Update methods in the `Todo` class to handle the new attribute as required.
+3. **Update UI/Interactions**: Modify user interfaces or interactions to accommodate the new attribute if necessary.
+
+## Adding a New Interface to the Project
+
+To add a new interface to the project, follow these steps:
+
+1. **Define Interface**: Create a new interface specifying the methods and contracts.
+2. **Implement Interface**: Implement the interface in one or more classes.
+3. **Utilize Interface**: Use the interface where applicable throughout the project for abstraction and polymorphism.
+
+
+
+
+
 ## Diagramme de Classe
 Ci-dessous, le diagramme de classe UML illustre la structure du code :
 
