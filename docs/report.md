@@ -160,7 +160,28 @@ Pour ajouter une nouvelle interface au projet, suivez ces étapes :
 2. Implémentez cette interface dans les classes pertinentes du projet.
 3. Assurez-vous que toutes les méthodes de l'interface sont correctement implémentées dans les classes concernées.
 
-Ces étapes fournissent un guide détaillé pour les nouveaux contributeurs souhaitant ajouter de nouvelles fonctionnalités au projet, en garantissant une intégration fluide et cohérente dans le cadre existant.
+
+
+## Implémentation de la Commande / web
+
+### Difficultés Rencontrées
+Malheureusement, malgré les efforts déployés, l'implémentation de la commande `/ web` n'a pas été réalisée avec succès dans le cadre de ce projet.
+
+### Raisons des Difficultés
+Plusieurs facteurs ont contribué aux difficultés rencontrées lors de l'implémentation de la commande `/ web`. Parmi les principaux :
+- La complexité de la mise en place d'un serveur web avec les fonctionnalités de REST API.
+- La nécessité d'interagir avec des requêtes HTTP et de comprendre le fonctionnement des protocoles de communication.
+- Le manque de temps et de ressources pour se familiariser avec les concepts avancés nécessaires à cette implémentation.
+
+### Perspectives d'Amélioration
+Malgré l'échec de cette tentative, des pistes d'amélioration peuvent être explorées à l'avenir pour réussir l'implémentation de la commande `/ web`. Parmi les possibilités :
+- Consulter des ressources supplémentaires sur la mise en place de serveurs web en Java.
+- Rechercher des tutoriels et des exemples de projets similaires pour comprendre les meilleures pratiques.
+- Collaborer avec des pairs ou des experts ayant une expertise dans ce domaine pour obtenir de l'aide et des conseils.
+
+### Conclusion
+Bien que l'implémentation de la commande `/ web` n'ait pas été achevée, cette expérience a permis d'identifier les défis et les lacunes à combler pour réussir des projets similaires à l'avenir. Il est important de tirer des leçons de cette expérience et de continuer à progresser dans l'apprentissage et la maîtrise des concepts liés au développement web en Java.
+
 
 
 
