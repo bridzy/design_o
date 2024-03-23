@@ -116,44 +116,51 @@ L'utilisation de ces motifs de conception rend le code plus modulaire, facile à
 ##Final
 
 
-flowchart TD
-    add_new_command["Add a new command"]
-    add_new_file_datasource["Add a new file-based datasource"]
-    add_new_nonfile_datasource["Add a non-file-based datasource"]
-    add_new_attribute_todo["Add a new attribute to a Todo"]
-    add_new_interface["Add a new interface to the project"]
+# Rapport Final
 
-    add_new_command -->|1. Add a new method in App.java| step1
-    add_new_file_datasource -->|1. Create a new class implementing TodoFileManager| step2
-    add_new_nonfile_datasource -->|1. Create a new class implementing TodoFileManager| step3
-    add_new_attribute_todo -->|1. Add a new attribute in the Todo class| step4
-    add_new_interface -->|1. Create a new interface| step5
+Ce rapport présente les procédures et les étapes nécessaires pour intégrer de nouvelles fonctionnalités à notre projet, telles que l'ajout de nouvelles commandes, de sources de données basées sur des fichiers ou non, l'ajout de nouveaux attributs à une tâche (Todo), et l'intégration de nouvelles interfaces au projet. Chaque section décrit en détail les étapes à suivre pour chaque ajout, offrant ainsi un guide clair pour les nouveaux contributeurs du projet.
 
-    step1[Create a new method in App.java] -->|Define the method signature and functionality| step1a
-    step1a[Implement the command logic in the new method] -->|Handle the command execution| step1b
-    step1b[Handle command options and arguments] -->|Implement the desired functionality| step1c
-    step1c[Handle error cases and provide relevant feedback] -->|Ensure proper error handling and status code| end1
+## Ajout d'une Nouvelle Commande
 
-    step2[Create a new class implementing TodoFileManager] -->|Implement the required methods| step2a
-    step2a[Implement the insert and list methods according to the new file format] -->|Handle file-based operations| end2
+Pour ajouter une nouvelle commande, suivez ces étapes :
 
-    step3[Create a new class implementing TodoFileManager] -->|Implement the required methods| step3a
-    step3a[Implement the insert and list methods according to the new datasource type] -->|Handle non-file-based operations| end3
+1. Dans le fichier `App.java`, créez une nouvelle méthode pour la nouvelle commande en définissant sa signature et sa fonctionnalité.
+2. Implémentez la logique de la commande dans la nouvelle méthode, en gérant son exécution, ses options et ses arguments.
+3. Assurez-vous de gérer correctement les cas d'erreur et de fournir des informations pertinentes en cas d'échec.
 
-    step4[Add a new attribute in the Todo class] -->|Define the attribute and its type| step4a
-    step4a[Modify Todo class to include the new attribute] -->|Update getters and setters| end4
+## Ajout d'une Source de Données Basée sur un Fichier
 
-    step5[Create a new interface] -->|Define the interface methods| step5a
-    step5a[Implement the interface in relevant classes] -->|Ensure implementation of interface methods| end5
+Pour ajouter une nouvelle source de données basée sur un fichier, suivez ces étapes :
 
-    end1((End))
-    end2((End))
-    end3((End))
-    end4((End))
-    end5((End))
+1. Créez une nouvelle classe implémentant l'interface `TodoFileManager`.
+2. Implémentez les méthodes requises (`insert` et `list`) en fonction du nouveau format de fichier.
+3. Assurez-vous de gérer correctement les opérations basées sur le fichier, telles que l'écriture et la lecture.
 
+## Ajout d'une Source de Données Non Basée sur un Fichier
 
+Pour ajouter une nouvelle source de données non basée sur un fichier, suivez ces étapes :
 
+1. Créez une nouvelle classe implémentant l'interface `TodoFileManager`.
+2. Implémentez les méthodes requises (`insert` et `list`) en fonction du type de source de données.
+3. Assurez-vous de gérer correctement les opérations non basées sur le fichier, en fonction des besoins du projet.
+
+## Ajout d'un Nouvel Attribut à une Tâche (Todo)
+
+Pour ajouter un nouvel attribut à une tâche, suivez ces étapes :
+
+1. Définissez le nouvel attribut et son type dans la classe `Todo`.
+2. Mettez à jour la classe `Todo` pour inclure le nouvel attribut, en modifiant les getters et les setters au besoin.
+3. Assurez-vous que les modifications sont cohérentes avec le reste du code et qu'elles n'introduisent pas de régressions.
+
+## Ajout d'une Nouvelle Interface au Projet
+
+Pour ajouter une nouvelle interface au projet, suivez ces étapes :
+
+1. Créez une nouvelle interface définissant les méthodes nécessaires.
+2. Implémentez cette interface dans les classes pertinentes du projet.
+3. Assurez-vous que toutes les méthodes de l'interface sont correctement implémentées dans les classes concernées.
+
+Ces étapes fournissent un guide détaillé pour les nouveaux contributeurs souhaitant ajouter de nouvelles fonctionnalités au projet, en garantissant une intégration fluide et cohérente dans le cadre existant.
 
 
 
