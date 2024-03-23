@@ -116,47 +116,42 @@ L'utilisation de ces motifs de conception rend le code plus modulaire, facile à
 ##Final
 
 
-# Newcomer Guide
+flowchart TD
+    add_new_command["Add a new command"]
+    add_new_file_datasource["Add a new file-based datasource"]
+    add_new_nonfile_datasource["Add a non-file-based datasource"]
+    add_new_attribute_todo["Add a new attribute to a Todo"]
+    add_new_interface["Add a new interface to the project"]
 
-## Adding a New Command
+    add_new_command -->|1. Add a new method in App.java| step1
+    add_new_file_datasource -->|1. Create a new class implementing TodoFileManager| step2
+    add_new_nonfile_datasource -->|1. Create a new class implementing TodoFileManager| step3
+    add_new_attribute_todo -->|1. Add a new attribute in the Todo class| step4
+    add_new_interface -->|1. Create a new interface| step5
 
-To add a new command, a newcomer can follow these steps:
+    step1[Create a new method in App.java] -->|Define the method signature and functionality| step1a
+    step1a[Implement the command logic in the new method] -->|Handle the command execution| step1b
+    step1b[Handle command options and arguments] -->|Implement the desired functionality| step1c
+    step1c[Handle error cases and provide relevant feedback] -->|Ensure proper error handling and status code| end1
 
-1. **Create a New Command Class**: Implement the new command as a new class extending the `Command` interface.
-2. **Define Command Logic**: Implement the logic for the new command within the class.
-3. **Register Command**: Register the new command in the application's command registry.
+    step2[Create a new class implementing TodoFileManager] -->|Implement the required methods| step2a
+    step2a[Implement the insert and list methods according to the new file format] -->|Handle file-based operations| end2
 
-## Adding a New File-Based Datasource
+    step3[Create a new class implementing TodoFileManager] -->|Implement the required methods| step3a
+    step3a[Implement the insert and list methods according to the new datasource type] -->|Handle non-file-based operations| end3
 
-To add a new file-based datasource, a newcomer can do the following:
+    step4[Add a new attribute in the Todo class] -->|Define the attribute and its type| step4a
+    step4a[Modify Todo class to include the new attribute] -->|Update getters and setters| end4
 
-1. **Create Datasource Class**: Implement the new datasource as a class, handling file I/O operations for the specific format.
-2. **Implement Interface**: Implement the `FileDatasource` interface to ensure consistency with other file-based datasources.
-3. **Register Datasource**: Register the new datasource in the application's datasource registry.
+    step5[Create a new interface] -->|Define the interface methods| step5a
+    step5a[Implement the interface in relevant classes] -->|Ensure implementation of interface methods| end5
 
-## Adding a Non-File-Based Datasource
+    end1((End))
+    end2((End))
+    end3((End))
+    end4((End))
+    end5((End))
 
-To add a non-file-based datasource, the process involves:
-
-1. **Create Datasource Class**: Implement the new datasource as a class, providing methods to interact with the non-file-based storage.
-2. **Implement Interface**: Implement the `Datasource` interface to ensure consistency with other datasources.
-3. **Register Datasource**: Register the new datasource in the application's datasource registry.
-
-## Adding a New Attribute to a Todo
-
-To add a new attribute to a Todo, newcomers should:
-
-1. **Modify Todo Class**: Add a new field to the `Todo` class to represent the new attribute.
-2. **Update Methods**: Update methods in the `Todo` class to handle the new attribute as required.
-3. **Update UI/Interactions**: Modify user interfaces or interactions to accommodate the new attribute if necessary.
-
-## Adding a New Interface to the Project
-
-To add a new interface to the project, follow these steps:
-
-1. **Define Interface**: Create a new interface specifying the methods and contracts.
-2. **Implement Interface**: Implement the interface in one or more classes.
-3. **Utilize Interface**: Use the interface where applicable throughout the project for abstraction and polymorphism.
 
 
 
